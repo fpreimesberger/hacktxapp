@@ -3,6 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var fs = require('fs');
+var AWS = require('aws-sdk');
+require('dotenv').config();
+
+var s3 = new AWS.S3({
+  accessKeyId: process.env.AWSAccessKeyId,
+  secretAccessKey: process.env.AWSSecretKey
+});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
