@@ -2,9 +2,10 @@
 <p style="text-align:center">Reduce food waste</p>
 
 <form method="POST" action="/upload" enctype="multipart/form-data">
-        <div class="field">
-            <label for="image">Image Upload</label>
-            <input type="file" name="image" id="image">
-        </div>
+{{!-- enctype="multipart/form-data"> --}}
+    <div class="field">
+        <label for="image">Image Upload</label>
+        <input type="file" name="image" id="image">
+    </div>
         <input type="submit" class="btn" value="Save">
 </form>

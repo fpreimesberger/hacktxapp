@@ -4,13 +4,26 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var fs = require('fs');
-var AWS = require('aws-sdk');
+var aws = require('aws-sdk');
+var multer = require('multer')
+var multerS3 = require('multer-s3')
+
+// Set storage engine
+var storage = multer.diskStorage({
+  destination: './public/uploads/',
+  filename: function(req, file, cb){
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+
+// Init upload
+const upload = multer({
+  storage: storage
+}).single('image');
+
 require('dotenv').config();
 
-var s3 = new AWS.S3({
-  accessKeyId: process.env.AWSAccessKeyId,
-  secretAccessKey: process.env.AWSSecretKey
-});
+module.exports = upload;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -45,5 +58,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;
