@@ -6,3 +6,20 @@ body {
 a {
   color: #00B7FF;
 }
+
+
+h1 { 
+  font-family: 'RawlineRegular'; 
+  font-weight: normal; 
+  font-style: normal; 
+  text-align: center;
+  font-size: 50px;
+}
+
+p { 
+  font-family: 'RobotoRegular'; 
+  font-weight: normal; 
+  font-style: normal; 
+  color: darkslategrey;
+  size: 20px;
+}
