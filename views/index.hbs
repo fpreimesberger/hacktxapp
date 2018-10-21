@@ -1,11 +1,25 @@
-<h1>STAY<b>FRESH</b></h1>
-<p style="text-align:center">Reduce food waste</p>
+<body>
+<div class='outer' width='100%'>
+<div class='whiteBox'>
 
-<form method="POST" action="/upload" enctype="multipart/form-data">
+    <h1>STAY<b>FRESH</b></h1>
+    <h2>How it works</h2>
+    <p style="text-align:center">Input your phone number<br>Upload a picture of the produce you just purchased
+    <br>Our web app will figure out when it's expiring and remind you<br>ndfuioneoiruncf</p>
+
+    <p style="text-align:center">
+    <div class='container'>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
 {{!-- enctype="multipart/form-data"> --}}
-    <div class="field">
-        <label for="image">Image Upload</label>
-        <input type="file" name="image" id="image">
+        <div class="field">
+            <label for="image">Upload image (.jpg and .png only)</label>
+            <input type="file" name="image" id="image">
+        </div>
+            <input type="submit" class="btn" value="Save">
+    </form>
     </div>
-        <input type="submit" class="btn" value="Save">
-</form>
+    </p>
+
+</div>
+</div>
+</body>

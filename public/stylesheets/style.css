@@ -7,6 +7,24 @@ a {
   color: #00B7FF;
 }
 
+body {
+  background-image: url('/images/veg.jpeg');
+  background-position: center;
+  background-size: cover;
+}
+
+.outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.whiteBox {
+  background: white;
+  width: 60%;
+  display: inline-block;
+  border-radius: 8px;
+}
 
 h1 { 
   font-family: 'RawlineRegular'; 
@@ -16,10 +34,22 @@ h1 {
   font-size: 50px;
 }
 
+h2 {
+  font-family: 'RawlineRegular'; 
+  font-weight: normal; 
+  font-style: normal; 
+  text-align: center;
+  font-size: 30px;
+  margin: 0;
+  padding: 0;
+}
+
 p { 
   font-family: 'RobotoRegular'; 
   font-weight: normal; 
   font-style: normal; 
   color: darkslategrey;
   size: 20px;
+  margin: 0;
+  padding: 0 0 50px;
 }

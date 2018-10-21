@@ -29,8 +29,17 @@ router.post('/upload', function(req, res) {
     if (err) {
       res.render('error');
     } else {
-      console.log(req.file);
+      // successful upload
+      // NAME OF FILE 
+      console.log(req.file.filename);
       res.send('test');
+
+
+      // json of vegs and fruits
+
+      // estimate expiration
+
+      // set up push notifs
     }
   });
 });
