@@ -18,6 +18,17 @@ var options = {
   args: []
 };
 
+function getPython(foodRecog, options) {
+  ps.PythonShell.run(foodRecog, options, function (err, results) {
+    if (err) throw err;
+    else {
+      var data = results.toString();
+      console.log(data);
+      return data;
+    }
+  });
+ }
+
 // Set storage engine
 var storage = multer.diskStorage({
   destination: 'C:\\Users\\Abhishek\\Miniconda3\\python',
@@ -56,13 +67,15 @@ router.post('/upload', function(req, res) {
       // options.args = ['../public/uploads/' + req.file.filename];
       options.args = ['C:/Users/Abhishek/Documents/github/hacktxapp/public/uploads/image-1540080516637.jpg'];
       console.log(options.args[0])
-      ps.PythonShell.run(foodRecog, options, function (err, results) {
-        if (err) throw err;
-        else {
-          var data = results.toString();
-          console.log(data);
-        }
-      });
+      getPython(foodRecog, options).then((data) => {
+        client.messages.create({
+          body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+          from: '+18606064589',
+          to: '+12818137130'
+        })
+        .then(message => console.log("Text successfully sent!"))
+        .done();
+      })
       res.render('output');
 
 
@@ -74,13 +87,6 @@ router.post('/upload', function(req, res) {
 
       // set up push notifs
       // time delay ???
-      client.messages.create({
-        body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
-        from: '+18606064589',
-        to: '+12818137130'
-      })
-      .then(message => console.log("Text successfully sent!"))
-      .done();
       }
      });
 });
