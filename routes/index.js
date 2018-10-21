@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var app = express();
+const accountSid = process.env.twilioSSI;
+const authToken = process.env.twilioAUTH;
+const client = require('twilio')(accountSid, authToken);
 
 var multer = require('multer')
 var multerS3 = require('multer-s3')
@@ -24,6 +27,14 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'STAY FRESH' });
 });
 
+router.get('/about', function(req, res, next) {
+  res.render('about', { title: 'STAY FRESH' });
+});
+
+router.get('/output', function(req, res, next) {
+  res.render('output', {items: ["bananas: 1 week", "apples: 2 weeks", "potatoes: 2 months"]});
+})
+
 router.post('/upload', function(req, res) {
   upload(req, res, (err) => {
     if (err) {
@@ -32,7 +43,7 @@ router.post('/upload', function(req, res) {
       // successful upload
       // NAME OF FILE 
       console.log(req.file.filename);
-      res.send('test');
+      res.render('output');
 
 
       // json of vegs and fruits
@@ -40,8 +51,16 @@ router.post('/upload', function(req, res) {
       // estimate expiration
 
       // set up push notifs
-    }
-  });
+      // time delay ???
+      client.messages.create({
+        body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+        from: '+18606064589',
+        to: '+12818137130'
+      })
+      .then(message => console.log("Text successfully sent!"))
+      .done();
+      }
+     });
 });
 
 module.exports = router;

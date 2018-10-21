@@ -8,16 +8,15 @@
     <br>Our web app will figure out when it's expiring and remind you<br>ndfuioneoiruncf</p>
 
     <p style="text-align:center">
-    <div class='container'>
     <form method="POST" action="/upload" enctype="multipart/form-data">
 {{!-- enctype="multipart/form-data"> --}}
         <div class="field">
-            <label for="image">Upload image (.jpg and .png only)</label>
-            <input type="file" name="image" id="image">
+            <p style="text-align:center"><label for="image">Upload image (.jpg and .png only)</label>
+            </p>
+            <p style="text-align:center"><input type="file" name="image" id="image"></p>
         </div>
-            <input type="submit" class="btn" value="Save">
+            <p style="text-align:center"><input type="submit" class="btn" value="Save"></p>
     </form>
-    </div>
     </p>
 
 </div>
@@ -26,8 +25,11 @@
 <div class='outer'>
 <div class='whiteBox'>
     <br><h2>Why use StayFresh?</h2><br><br>
-    <p>Infographic?</p>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <div style="display:table-cell; vertical-align:middle; text-align:center">
+        <img src="/images/infographic.jpg" width="500">
+        <br><br>
+    </div>
+    {{!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> --}}
 </div>
 
 </div>

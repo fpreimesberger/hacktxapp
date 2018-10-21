@@ -52,5 +52,50 @@ p {
   color: darkslategrey;
   size: 20px;
   margin: 0;
-  padding: 0 0 50px;
+  padding: 0 0 30px;
+}
+
+label {
+  font-family: 'RobotoRegular'; 
+  font-weight: normal; 
+  font-style: normal; 
+  color: darkslategrey;
+  size: 20px;
+}
+
+input {
+  font-family: 'RobotoRegular'; 
+  font-weight: normal; 
+  font-style: normal; 
+  color: darkslategrey;
+  size: 20px;
+}
+
+.btn {
+  font-family: 'RobotoRegular'; 
+  font-weight: normal; 
+  font-style: normal; 
+  color: darkslategrey;
+  size: 20px;
+}
+
+form { 
+  margin: 0 auto; 
+  width:350px;
+  }
+
+li {
+  font-family: 'RobotoRegular'; 
+  font-weight: normal; 
+  font-style: normal; 
+  color: darkslategrey;
+  size: 20px;
+  margin: 0;
+  list-style: none;
+}
+
+img {
+  /* align-items: center;
+  /* position: absolute; */
+  margin: 0 100px 0;
 }
