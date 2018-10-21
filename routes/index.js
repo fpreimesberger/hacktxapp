@@ -18,20 +18,9 @@ var options = {
   args: []
 };
 
-function getPython(foodRecog, options) {
-  ps.PythonShell.run(foodRecog, options, function (err, results) {
-    if (err) throw err;
-    else {
-      var data = results.toString();
-      console.log(data);
-      return data;
-    }
-  });
- }
-
 // Set storage engine
 var storage = multer.diskStorage({
-  destination: 'C:\\Users\\Abhishek\\Miniconda3\\python',
+  destination: 'C:/Users/Abhishek/Documents/github/hacktxapp/public/uploads/',
   filename: function(req, file, cb){
     cb(null, file.fieldname + '-' + Date.now() + ".jpg");
   }
@@ -53,8 +42,19 @@ router.get('/about', function(req, res, next) {
 });
 
 router.get('/output', function(req, res, next) {
-  res.render('output', {items: ["bananas: 1 week", "apples: 2 weeks", "potatoes: 2 months"]});
+  res.render('output', {items: items});
 })
+
+function text(data) {
+  client.messages.create({
+    body: "Your" + data[0] + " will expire in " + data[2] + " days. Don't forget to eat!",
+    from: '+18606064589',
+    to: '+12818137130'
+  }).then(message => {
+    console.log('jgjfj');
+    
+  }).done();
+}
 
 router.post('/upload', function(req, res) {
   upload(req, res, (err) => {
@@ -65,18 +65,25 @@ router.post('/upload', function(req, res) {
       // NAME OF FILE 
       console.log(req.file.filename);
       // options.args = ['../public/uploads/' + req.file.filename];
-      options.args = ['C:/Users/Abhishek/Documents/github/hacktxapp/public/uploads/image-1540080516637.jpg'];
+      options.args = ['C:/Users/Abhishek/Documents/github/hacktxapp/public/uploads/' + req.file.filename];
       console.log(options.args[0])
-      getPython(foodRecog, options).then((data) => {
-        client.messages.create({
-          body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
-          from: '+18606064589',
-          to: '+12818137130'
-        })
-        .then(message => console.log("Text successfully sent!"))
-        .done();
-      })
-      res.render('output');
+      ps.PythonShell.run(foodRecog, options, function (err, results) {
+        if (err) throw err;
+        else {
+          var data = results.toString();
+          data = data.split(',');
+
+          setTimeout(
+            function() {
+              text(data);
+            }, 5000);
+            newData = ["Item: " + data[0], "Room Temperature: " + data[1] + " days", "Refrigerator: " + data[2] + " days", "Freezer: " + data[3] + " days"]
+          res.render('output', {items: newData});
+        }
+      });
+
+
+      // res.render('output');
 
 
       // json of vegs and fruits
@@ -87,6 +94,8 @@ router.post('/upload', function(req, res) {
 
       // set up push notifs
       // time delay ???
+
+      
       }
      });
 });
