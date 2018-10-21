@@ -28,6 +28,7 @@ analyze_url = vision_base_url + "analyze"
 # data    = {'url': image_url}
 
 # for local images
+print(sys.argv[1])
 image_path = "./" + sys.argv[1]
 image_data = open(image_path, "rb").read()
 image = mpimg.imread(image_path)
@@ -65,6 +66,6 @@ for tag in tags:
     else:
         continue
     break
-    
+
 with open('exp.json', 'w') as fp:
     json.dump(expVals, fp)

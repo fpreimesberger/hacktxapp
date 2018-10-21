@@ -8,9 +8,19 @@ const client = require('twilio')(accountSid, authToken);
 var multer = require('multer')
 var multerS3 = require('multer-s3')
 
+var foodRecog = 'public\\scripts\\foodRecognizer.py'
+
+// Use python shell
+var ps = require('python-shell');
+
+var options = {
+  mode: 'text',
+  args: []
+};
+
 // Set storage engine
 var storage = multer.diskStorage({
-  destination: './public/uploads/',
+  destination: 'C:\\Users\\Abhishek\\Miniconda3\\python',
   filename: function(req, file, cb){
     cb(null, file.fieldname + '-' + Date.now() + ".jpg");
   }
@@ -43,6 +53,11 @@ router.post('/upload', function(req, res) {
       // successful upload
       // NAME OF FILE 
       console.log(req.file.filename);
+      options.args = ['../public/uploads/' + req.file.filename];
+      console.log(options.args[0])
+      ps.PythonShell.run(foodRecog, options, function (err, results) {
+        if (err) throw err;
+      });
       res.render('output');
 
 
