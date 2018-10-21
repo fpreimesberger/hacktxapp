@@ -53,15 +53,22 @@ router.post('/upload', function(req, res) {
       // successful upload
       // NAME OF FILE 
       console.log(req.file.filename);
-      options.args = ['../public/uploads/' + req.file.filename];
+      // options.args = ['../public/uploads/' + req.file.filename];
+      options.args = ['C:/Users/Abhishek/Documents/github/hacktxapp/public/uploads/image-1540080516637.jpg'];
       console.log(options.args[0])
       ps.PythonShell.run(foodRecog, options, function (err, results) {
         if (err) throw err;
+        else {
+          var data = results.toString();
+          console.log(data);
+        }
       });
       res.render('output');
 
 
       // json of vegs and fruits
+      // var json = require("../public/logs/exp.json");
+      // console.log(json);
 
       // estimate expiration
 

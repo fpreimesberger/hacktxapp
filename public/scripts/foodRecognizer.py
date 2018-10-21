@@ -2,8 +2,6 @@ import requests
 # If you are using a Jupyter notebook, uncomment the following line.
 # %matplotlib inline
 import sys
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
 import json
 from PIL import Image
 from io import BytesIO
@@ -28,11 +26,8 @@ analyze_url = vision_base_url + "analyze"
 # data    = {'url': image_url}
 
 # for local images
-print(sys.argv[1])
-image_path = "./" + sys.argv[1]
+image_path = sys.argv[1]
 image_data = open(image_path, "rb").read()
-image = mpimg.imread(image_path)
-
 
 params  = {'visualFeatures': 'Categories,Description,Color'}
 
@@ -53,19 +48,24 @@ response.raise_for_status()
 analysis = response.json()
 tags = analysis["description"]["tags"]
 
-with open('foodTable.json', 'r') as table:
+with open('C:/Users\Abhishek/Documents/github/hacktxapp/public/scripts/foodTable.json', 'r') as table:
     foodDict = json.load(table)
 
+obj = ''
+times = []
 for tag in tags:
     for food in foodDict:
         if tag in food or food in tag:
+            obj = tag
             expVals = {tag : foodDict.get(food)}
             for val in expVals[tag]:
                 expVals[tag][val] = int(expVals[tag][val])
+                times.append(int(expVals[tag][val]))
             break
     else:
         continue
     break
 
-with open('exp.json', 'w') as fp:
-    json.dump(expVals, fp)
+print('{},{},{},{}'.format(obj, times[0], times[1], times[2]))
+# with open('public/logs/exp.json', 'w') as fp:
+#     json.dump(expVals, fp)
